@@ -55,11 +55,22 @@ ev %>%
   ## remove experimental sets concurrent with low mass spec performance
   filter(!grepl("FP9[56]|FP103", Set)) %>%
   ## Make sure all runs are described in design, if not, remove them
-  filter(Set %in% meta$Set) -> ev
+  filter(Set %in% meta$Set) -> specht2019v2
 
 ## Create the Features object
-specht2019v2 <- readSCP(ev, meta, channelCol = "Channel", batchCol = "Set")
-rm(ev); gc()
+specht2019v2 <- readSCP(quantTable = specht2019v2, metaTable = meta, 
+                        channelCol = "Channel", batchCol = "Set")
+
+## Remove all place holder samples for TMT-11 runs
+## The batches that were acquired with the TMT-11 protocole have column 12-16 
+## filled with NA. We remove those. 
+lapply(experiments(specht2019v2), 
+       function(e) colSums(is.na(assay(e))) != nrow(e) ) %>%
+  unname %>%
+  unlist -> 
+  cols
+cols <- names(cols)[cols]
+specht2019v2 <- specht2019v2[, cols, ]
 
 
 ####---- Include the peptide data ----####
@@ -128,8 +139,6 @@ specht2019v2 <- addAssayLink(specht2019v2, from = "peptides", to = "proteins",
                              varFrom = "protein", varTo = "protein")
 
 ####--- Try out data ----####
-
-rowData(specht2019v2[["proteins"]])$protein %>%head
 
 ## P07355 (Annexin A2) was shown in the paper to have different expression 
 ## levels depending on the cell type

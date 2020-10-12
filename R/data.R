@@ -1,684 +1,994 @@
-####---- DESCRIPTION ----####
-
-# Data utilities along with data documentation
-
-
-#' List the available data sets in the scpdata package
-#' 
-#' The function lists the available datasets in the package. 
-#' 
-#' @import MSnbase
-#' @import SingleCellExperiment
-#' 
-#' @details 
-#' See the documentation of a particular data set for more information (eg 
-#' \code{?specht2019}). 
-#' 
-#' @return 
-#' An object of class "packageIQR" containing all available data sets.
-#' 
-#' @examples
-#' scpdata()
-#' 
-#' @export
-#' 
-scpdata <- function(){
-  out <- data(package = "scpdata")
-  return(out)
-}
-
-####---- ZHU ET AL. 2018, MOL. AND CELL. PROTEOMICS ----####
-
-#' laser dissection + nanoPOTS:  (Zhu et al. 2018, Mol Cell Proteomics)
-#' 
-#' Near single-cell proteomics data produced and published by Zhu et al. 
-#' (see references). It contains quantitative information for 24 mouse brain 
-#' sections. The samples were brains from rat pups (day 17). The slices are 12
-#' µm thick squares of either 50, 100, or 200 µm width. 5 samples were dissected 
-#' from the corpus callum (\code{"CC"}), 4 samples were dissected from the 
-#' corpus collosum (\code{"CP"}), 13 samples were extracted from the cerebral 
-#' cortex (\code{"CTX"}), and 2 samples are labeled as (\code{"Mix"}).
-#' 
-#' @usage
-#' data("zhu2018MCP_peptide")
-#' 
-#' @format 
-#' \itemize{
-#'   \item \code{zhu2018MCP_peptide}: a \code{\link{SingleCellExperiment}} 
-#'   with peptide expression levels for 10074 peptides x 24 samples
-#' }
-#' See Details for information about data collection.
-#' 
-#' @details
-#' 
-#' Peptide data were collected from the PRIDE repository (accession ID: 
-#' PXD008844), sample annotations were infered from column names.
-#' 
-#' \strong{Peptide expression data: \code{zhu2018MCP_peptide}}
-#' 
-#' We processed the MaxQuant output \code{MaxQuant_Peptides.txt} as follows:
-#' \itemize{
-#'   \item Extract the phenotype data (sample type) from the intensity column 
-#'   names.
-#'   \item Remove contaminants and reverse hits 
-#'   \item Remove peptides with a posterior error probability < 0.01
-#'   \item Replace 0's by NA's
-#'   \item Remove rows (peptides) that contain only NA's
-#' }
-#' We finally formated the data to an \code{\link{SingleCellExperiment}} 
-#' object. The samples in this data set are coming from different brain regions
-#' (CTX, CP, or CC) and dissected as 50, 100 or 200 µm wide squares.
-#' 
-#' @source 
-#' The raw data, the idenfication and quantification results can be found in the
-#' PRIDE repository 
-#' \href{ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2018/07/PXD008844}{PXD008844}
-#' 
-#' @references 
-#' Zhu, Ying, Maowei Dou, Paul D. Piehowski, Yiran Liang, Fangjun Wang, Rosalie 
-#' K. Chu, William B. Chrisler, et al. 2018. “Spatially Resolved Proteome 
-#' Mapping of Laser Capture Microdissected Tissue with Automated Sample
-#' Transfer to Nanodroplets.” Molecular & Cellular Proteomics: MCP 17 (9): 
-#' 1864–74. \href{http://dx.doi.org/10.1074/mcp.TIR118.000686}{DOI}
-#' 
-#' @docType data
-#'
-#' @keywords datasets
-#' 
-#' @aliases zhu2018MCP_peptide
-#' 
-"zhu2018MCP_peptide"
-
-####---- ZHU ET AL. 2018, NATURE COMM ----####
-
-#' laser dissection + nanoPOTS: T1D islets (Zhu et al. 2018, Nat Comm)
-#' 
-#' Near single-cell proteomics data produced and published by Zhu et al. 
-#' (see references). It contains quantitative information for 18 human pancreas 
-#' samples. The samples are pancreatic islets laser dissected from pancreatic 
-#' tissue slices from pancreata recovered from organ donors through the 
-#' JDRFNetwork for Pancreatic Organ Donors with Diabetes (nPOD) program. 9 
-#' samples out 18 are control islets, the 9 others are from type 1 diabetes 
-#' (T1D) patients. 
-#' 
-#' @usage
-#' data("zhu2018NC_islets_peptide")
-#' 
-#' @format 
-#' \itemize{
-#'   \item \code{zhu2018NC_islets_peptide}: a \code{\link{SingleCellExperiment}} 
-#'   with peptide expression levels for 18611 peptides x 18 samples
-#' }
-#' See Details for information about data collection.
-#' 
-#' @details
-#' 
-#' Peptide data were collected from the PRIDE repository (accession ID: 
-#' PXD006847), sample annotations were infered from column names.
-#' 
-#' \strong{Peptide expression data: \code{zhu2018NC_islets_peptide}}
-#' 
-#' We processed the MaxQuant output \code{Islet_t1d_ct_peptides.txt} as 
-#' follows:
-#' \itemize{
-#'   \item Extract the phenotype data (sample type) from the intensity column 
-#'   names.
-#'   \item Remove contaminants and reverse hits 
-#'   \item Remove peptides with a posterior error probability < 0.01
-#'   \item Replace 0's by NA's
-#' }
-#' We finally formated the data to an \code{\link{SingleCellExperiment}} 
-#' object. The samples in this data set are either a cell lysate 
-#' (\code{"lysate"}), HeLA cells (\code{"cells"}), blank samples 
-#' (\code{"blank"}), or cancer cell lines (\code{"MCF7"} and \code{"THP1"}).
-#' 
-#' @source 
-#' The raw data, the idenfication and quantification results can be found in the
-#' PRIDE repository 
-#' \href{ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2018/01/PXD006847}{PXD006847}
-#' 
-#' @references 
-#' Zhu, Ying, Paul D. Piehowski, Rui Zhao, Jing Chen, Yufeng Shen, Ronald J. 
-#' Moore, Anil K. Shukla, et al. 2018. “Nanodroplet Processing Platform for Deep 
-#' and Quantitative Proteome Profiling of 10-100 Mammalian Cells.” Nature 
-#' Communications 9 (1): 882. \href{http://dx.doi.org/10.1038/s41467-018-03367-w}{DOI}
-#' 
-#' @docType data
-#'
-#' @keywords datasets
-#' 
-#' @aliases zhu2018NC_islets_peptide
-#' 
-"zhu2018NC_islets_peptide"
-
-
-#' nanoPOTS: HeLa dilutions (Zhu et al. 2018, Nat Comm)
-#' 
-#' Near single-cell proteomics data produced and published by Zhu et al. 
-#' (see references). It contains quantitative information for 21 samples, 
-#' some being triplicates of HeLa dilution (~10, ~40 and ~140 cells). Remaining
-#' samples are blanks (0 cells), lysate or cancer cell lines (THP-1 or MCF-7).
-#' 
-#' @usage
-#' data("zhu2018NC_hela_peptide")
-#' 
-#' @format 
-#' \itemize{
-#'   \item \code{zhu2018NC_hela_peptide}: a \code{\link{SingleCellExperiment}} 
-#'   with peptide expression levels for 30345 peptides x 21 samples
-#' }
-#' See Details for information about data collection.
-#' 
-#' @details
-#' 
-#' Peptide data were collected from the PRIDE repository (accession ID: 
-#' PXD006847), sample annotations were infered from column names.
-#' 
-#' \strong{Peptide expression data: \code{zhu2018NC_hela_peptide}}
-#' 
-#' We processed the MaxQuant output \code{CulturedCells_peptides.txt} as 
-#' follows:
-#' \itemize{
-#'   \item Extract the phenotype data (sample type, and number of cells when 
-#'   single cells) from the intensity column names.
-#'   \item Remove contaminants and reverse hits 
-#'   \item Remove peptides with a posterior error probability < 0.01
-#'   \item Replace 0's by NA's
-#' }
-#' We finally formated the data to an \code{\link{SingleCellExperiment}} 
-#' object. The samples in this data set are either a cell lysate 
-#' (\code{"lysate"}), HeLA cells (\code{"cells"}), blank samples 
-#' (\code{"blank"}), or cancer cell lines (\code{"MCF7"} and \code{"THP1"}).
-#' 
-#' @source 
-#' The raw data, the idenfication and quantification results can be found in the
-#' PRIDE repository 
-#' \href{ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2018/01/PXD006847}{PXD006847}
-#' 
-#' @references 
-#' Zhu, Ying, Paul D. Piehowski, Rui Zhao, Jing Chen, Yufeng Shen, Ronald J. 
-#' Moore, Anil K. Shukla, et al. 2018. “Nanodroplet Processing Platform for Deep 
-#' and Quantitative Proteome Profiling of 10-100 Mammalian Cells.” Nature 
-#' Communications 9 (1): 882. \href{http://dx.doi.org/10.1038/s41467-018-03367-w}{DOI}
-#' 
-#' @docType data
-#'
-#' @keywords datasets
-#' 
-#' @aliases zhu2018NC_hela_peptide
-#' 
-"zhu2018NC_hela_peptide"
 
 
 ####---- SPECHT ET AL. 2019 ----####
 
 
-#' FACS + SCoPE2: macrophages vs monocytes (Specht et al. 2019)
-#'
-#' Single cell proteomics data produced and published by Specht et al. from the 
-#' Slavov Lab (see references). It contains quantitative information 356 cells. 
-#' Cells can be either macrophages (n = 259) or monocytes (n = 97). 
-#' 
-#' @usage
-#' data("specht2019v1_protein")
-#' data("specht2019v1_peptide")
-#' 
-#' @format 
-#' \itemize{
-#'   \item \code{specht2019v1_peptide}: a \code{\link{SingleCellExperiment}} 
-#'   with peptide expression levels for 7515 peptides x 682 samples
-#'   \item \code{specht2019v1_protein}: a \code{\link{SingleCellExperiment}} 
-#'   with protein expression levels for 2316 proteins x 356 samples (=cells)
-#' }
-#' See Details for information about data collection.
-#'
-#' @details
-#' 
-#' Peptide data were collected from the massIVE database (accession ID: 
-#' MSV000083945), annotations were received during a personnal discussion but 
-#' are also contained in version 2 of the data (see 
-#' \code{\link{specht2019v2_peptide}}): 
-#' \itemize{
-#'   \item \code{ev_updated.txt}: the MaxQuant/DART-ID output file
-#'   \item \code{annotation_fp60-97.csv}: sample phenotype annotation
-#'   \item \code{batch_fp60-97.csv}: batch annotation
-#' }
-#'  
-#' Protein data were collected from the author's website (see sources).
-#' \itemize{
-#'   \item \code{Proteins-processed.csv}: Proteins x single cells at 1% FDR, 
-#'   imputed and batch corrected.
-#'   \item \code{Cells.csv}: Annotation x single cells. Each column corresponds 
-#'   to a single cell and the rows include relevant metadata, such as, cell type 
-#'   if known, measurements from the isolation of the cell, and derivative 
-#'   quantities, i.e., rRI, CVs, reliability.
-#' }
-#'  
-#' \strong{Peptide expression data: \code{specht2019v1_peptide}}
-#'  
-#' We processed the MaxQuant output \code{ev_updated.txt} as follows:
-#' \itemize{
-#'   \item Keep only column of interest, that is the peptide and protein 
-#'   information, the quantification information (TMT intensities), the 
-#'   identification information (PEP, q-values, PIF,...) and the contamination
-#'   information
-#'   \item Keep only the single cell runs (experiments FP94 and FP97)
-#'   \item Remove out reverse hits and contaminants (identified by MaxQuant), 
-#'   and contaminated spectra (\code{PIF > 0.8})
-#'   \item Remove peptides with low identification score (\code{FDR >= 0.01} or 
-#'   \code{PEP >= 0.02})
-#'   \item Remove cells with less than 300 peptides
-#'   \item Some peptides were identified twice within the same experiment set 
-#'   because of different charge states. The peptide identification with lowest 
-#'   PEP is kept and the other(s) discarded.
-#'   \item Intensity data is formated to a feature (peptide) x sample 
-#'   (combination of experiment run and TMT channel) matrix.
-#'   \item Zero intensities are replaced by NA's
-#'   \item Peptide information is gathered in a feature data frame, only 
-#'   peptide information common to all runs is kept (eg sequence, mass, 
-#'   protein,...).
-#'   \item Sample information is gathered in a phenotype data frame. The sample 
-#'   information is extracted from the \code{annotation_fp60-97.csv} and 
-#'   \code{batch_fp60-97.csv} files.
-#' }
-#' 
-#' We finally formated the data to an \code{\link{SingleCellExperiment}} 
-#' object. The samples in this data set are either a carrier well 
-#' (\code{"carrier_mix"}), a normalization well (\code{"norm"}), an unused
-#' well (\code{"unused"}), an empty well (\code{"sc_0"}), a macrophage cell
-#' (\code{"sc_m0"}), or a monocyte cell (\code{"sc_u"}).
-#' 
-#' \strong{Protein expression data: \code{specht2019v1_protein}}
-#'  
-#' On top of the steps described above, the peptide expression data were further
-#' processed by the authors to the protein data through the following steps: 
-#' \itemize{
-#'   \item Remove peptides that are more than 10\% the intensity of the carrier
-#'   \item Divide peptide intensities in every channel by the reference channel
-#'   \item Zero or infinite intensities are replaced by NA's
-#'   \item Remove cells having median CV > 0.43, having 30th quantile of the 
-#'   log10 transformed relative RIs smaller than -2.5, or having median of the 
-#'   log10 transformed relative RI larger than -1.3
-#'   \item Divide column (cells) with median intensity and divide rows with mean 
-#'   intensity
-#'   \item Remove rows (peptides) then columns (cells) that contain more than 
-#'   99\% of missing data
-#'   \item Log2 transform the data
-#'   \item Aggregate the peptide to their corresponding protein using their 
-#'   median value.
-#'   \item Normalize rows by subtracting the row average and normalize columns 
-#'   by subtracting the column median
-#'   \item Impute missing values using K-nearest neighbors (k = 3)
-#'   \item Correct for batch effect using the \code{\link{ComBat}} algorithm.
-#' }
-#' 
-#' This leads to the \code{Proteins-processed.csv} file. The protein 
-#' expression data are combined with the meta data (\code{Cells.csv}) into an 
-#' \code{\link{SingleCellExperiment}} object. The data set contains 
-#' macrophages (\code{"sc_m0"}) and monocytes (\code{"sc_u"}). 
-#'  
-#' @source 
-#' The data can be downloaded from the 
-#' \href{https://scope2.slavovlab.net/docs/data}{Slavov Lab} website. The raw 
-#' data and quantification data can also be found in the massIVE repository 
-#' \href{ftp://massive.ucsd.edu/MSV000083945}{MSV000083945}
-#' 
-#' @references 
-#' Specht, Harrison, Edward Emmott, Toni Koller, and Nikolai Slavov. 
-#' 2019. “High-Throughput Single-Cell Proteomics Quantifies the Emergence of 
-#' Macrophage Heterogeneity.” bioRxiv (\href{https://doi.org/10.1101/665307}{DOI}).
-#' 
-#' @docType data
-#'
-#' @keywords datasets
-#' 
-#' @seealso 
-#' \code{\link{specht2019v2_peptide}}, 
-#' \code{\link{specht2019v2_protein}}
-#' 
-#' @aliases specht2019v1_protein specht2019v2_peptide
-#'
-"specht2019v1_peptide"
+##' Specht et al. 2019: macrophages vs monocytes (version 2)
+##'
+##' Single cell proteomics data acquired by the Slavov Lab. This is the version 
+##' 2 of the data released in December 2019. It contains quantitative 
+##' information of macrophages and monocytes at PSM, peptide and protein level. 
+##' 
+##' @format A `Features` object with 179 assays, each assay being a 
+##' `SingleCellExperiment` object: 
+##' 
+##' - Assay 1-63: PSM data for SCoPE2 sets acquired with a TMT-11 
+##'   multiplexing protocole, hence those assays contain 11 columns. Columns 
+##'   hold quantitative information from single-cell channels, carrier channels, 
+##'   reference channels, empty (blank) channels and unused channels.
+##' - Assay 64-177: PSM data for SCoPE2 sets acquired with a TMT-16
+##'   multiplexing protocole, hence those assays contain 16 columns. Columns 
+##'   hold quantitative information from single-cell channels, carrier channels, 
+##'   reference channels, empty (blank) channels and unused channels.
+##' - `peptides`: peptide data containing quantitative data for 9208 
+##'   peptides and 1018 single-cells. Cell type annotation and batch annotation
+##'   are stored in `colData(specht2019v2[[178]]`.
+##' - `proteins`: protein data containing quantitative data for 2772 
+##'   proteins and 1018 single-cells. Cell type annotation and batch annotation
+##'   are stored in `colData(specht2019v2[[179]]`.
+##' 
+##' The `colData(specht2019v2)` contains cell type annotation and batch 
+##' annotation that are common to all assays. The description of the `rowData`
+##' fields for the PSM data can be found in the 
+##' [`MaxQuant` documentation](http://www.coxdocs.org/doku.php?id=maxquant:table:evidencetable).
+##' 
+##' See `Details`` for information about data collection.
+##'
+##' @details 
+##' 
+##' **Acquisition protocole**
+##' 
+##' The data was acquired using the following setup. More information can be 
+##' found in the source article (see `References`).
+##' 
+##' - **Cell isolation**: flow cytometry (BD FACSAria I).
+##' - **Sample preparation** performed using the SCoPE2 protcole. mPOP cell 
+##'   lysis + trypsin digestion + TMT 11plex or 16plex labeling and pooling.
+##' - **Separation**: online nLC (DionexUltiMate 3000 UHPLC with a 25cm x 75μm 
+##'   IonOpticksAurora Series UHPLC column; 200nL/min).
+##' - **Ionization**: ESI (2,200V).
+##' - **Mass spectrometry**: Thermo Scientific Q-Exactive (MS1 resolution = 
+##'   70,000; MS2 accumulation time = 300ms; MS2 resolution = 70,000).
+##' - **Data analysis**: DART-ID + MaxQuant (1.6.2.3).
+##' 
+##' **Data collection**
+##' 
+##' The PSM data were collected from a shared Goolge Drive folder that 
+##' is accessible from the SlavovLab website (see `Source` section). The folder 
+##' contains the following 
+##' files of interest: 
+##' 
+##' - `ev_updated.txt`: the MaxQuant/DART-ID output file
+##' - `annotation_fp60-97.csv`: sample annotation
+##' - `batch_fp60-97.csv`: batch annotation
+##' 
+##' We combined the the sample annotation and the batch annotation in a single 
+##' table. We also formated the quantification table so that columns match with 
+##' those of the annotation and filter only for single-cell runs. Both table 
+##' are then combined in a single `Features` object, where the quantitative data
+##' are split with respect to batch. 
+##'  
+##' The peptide data were taken from the Slavov lab directly (`Peptides-raw.csv`). 
+##' It is provided as a spreadsheet. The data were formated to a 
+##' `SingleCellExperiment` object and the sample metadata were matched to the 
+##' column names (mapping is retrieved after running the SCoPE2 R script) and 
+##' stored in the `colData`. The object is then added to the `Features` object 
+##' (containing the PSM assays) and the rows of the peptide data are linked to 
+##' the rows of the PSM data based on the peptide sequence information through 
+##' an `AssayLink` object. 
+##' 
+##' The protein data (`Proteins-processed.csv`) is formated similarly to the 
+##' peptide data, and the rows of the proteins were mapped onto the rows of the 
+##' peptide data based on the protein sequence information.
+##'  
+##' @source 
+##' The data were downloaded from the 
+##' [Slavov Lab](https://scope2.slavovlab.net/docs/data) website via a
+##' shared Google Drive 
+##' [folder](https://drive.google.com/drive/folders/1VzBfmNxziRYqayx3SP-cOe2gu129Obgx). 
+##' The raw data and the quantification data can also be found in the massIVE 
+##' repository 
+##' [MSV000083945](ftp://massive.ucsd.edu/MSV000083945).
+##' 
+##' @references Specht, Harrison, Edward Emmott, Aleksandra A. Petelski, R. Gray 
+##' Huffman, David H. Perlman, Marco Serra, Peter Kharchenko, Antonius Koller, 
+##' and Nikolai Slavov. 2019. “Single-Cell Mass-Spectrometry Quantifies the 
+##' Emergence of Macrophage Heterogeneity.” bioRxiv. 
+##' ([link to article](https://doi.org/10.1101/665307)).
+##' 
+##' @docType data
+##'
+##' @keywords datasets
+##' 
+"specht2019v2"
+
+
+##' Specht et al. 2019: macrophages vs monocytes (version 3)
+##'
+##' Single cell proteomics data acquired by the Slavov Lab. This is the version 
+##' 3 of the data released in August 2020. It contains quantitative 
+##' information of macrophages and monocytes at PSM, peptide and protein level.
+##' 
+##' @format A `Features` object with 179 assays, each assay being a 
+##' `SingleCellExperiment` object: 
+##' 
+##' - Assay 1-63: PSM data for SCoPE2 sets acquired with a TMT-11 
+##'   multiplexing protocole, hence those assays contain 11 columns. Columns 
+##'   hold quantitative information from single-cell channels, carrier channels, 
+##'   reference channels, empty (blank) channels and unused channels.
+##' - Assay 64-177: PSM data for SCoPE2 sets acquired with a TMT-16
+##'   multiplexing protocole, hence those assays contain 16 columns. Columns 
+##'   hold quantitative information from single-cell channels, carrier channels, 
+##'   reference channels, empty (blank) channels and unused channels.
+##' - `peptides`: peptide data containing quantitative data for 9208 
+##'   peptides and 1018 single-cells. Cell type annotation and batch annotation
+##'   are stored in `colData(specht2019v2[[178]]`.
+##' - `proteins`: protein data containing quantitative data for 2772 
+##'   proteins and 1018 single-cells. Cell type annotation and batch annotation
+##'   are stored in `colData(specht2019v2[[179]]`.
+##' 
+##' The `colData(specht2019v2)` contains cell type annotation and batch 
+##' annotation that are common to all assays. The description of the `rowData`
+##' fields for the PSM data can be found in the 
+##' [`MaxQuant` documentation](http://www.coxdocs.org/doku.php?id=maxquant:table:evidencetable).
+##' 
+##' See `Details`` for information about data collection.
+##'
+##' @details 
+##' 
+##' **Acquisition protocole**
+##' 
+##' The data was acquired using the following setup. More information can be 
+##' found in the source article (see `References`).
+##' 
+##' - **Cell isolation**: flow cytometry (BD FACSAria I).
+##' - **Sample preparation** performed using the SCoPE2 protcole. mPOP cell 
+##'   lysis + trypsin digestion + TMT 11plex or 16plex labeling and pooling.
+##' - **Separation**: online nLC (DionexUltiMate 3000 UHPLC with a 25cm x 75μm 
+##'   IonOpticksAurora Series UHPLC column; 200nL/min).
+##' - **Ionization**: ESI (2,200V).
+##' - **Mass spectrometry**: Thermo Scientific Q-Exactive (MS1 resolution = 
+##'   70,000; MS2 accumulation time = 300ms; MS2 resolution = 70,000).
+##' - **Data analysis**: DART-ID + MaxQuant (1.6.2.3).
+##' 
+##' **Data collection**
+##' 
+##' The PSM data were collected from a shared Goolge Drive folder that 
+##' is accessible from the SlavovLab website (see `Source` section). The folder 
+##' contains the following 
+##' files of interest: 
+##' 
+##' - `ev_updated_v2.txt`: the MaxQuant/DART-ID output file
+##' - `annotation_fp60-97.csv`: sample annotation
+##' - `batch_fp60-97.csv`: batch annotation
+##' 
+##' We combined the the sample annotation and the batch annotation in a single 
+##' table. We also formated the quantification table so that columns match with 
+##' those of the annotation and filter only for single-cell runs. Both table 
+##' are then combined in a single `Features` object, where the quantitative data
+##' are split with respect to batch. 
+##'  
+##' The peptide data were taken from the Slavov lab directly (`Peptides-raw.csv`). 
+##' It is provided as a spreadsheet. The data were formated to a 
+##' `SingleCellExperiment` object and the sample metadata were matched to the 
+##' column names (mapping is retrieved after running the SCoPE2 R script) and 
+##' stored in the `colData`. The object is then added to the `Features` object 
+##' (containing the PSM assays) and the rows of the peptide data are linked to 
+##' the rows of the PSM data based on the peptide sequence information through 
+##' an `AssayLink` object. 
+##' 
+##' The protein data (`Proteins-processed.csv`) is formated similarly to the 
+##' peptide data, and the rows of the proteins were mapped onto the rows of the 
+##' peptide data based on the protein sequence information.
+##' 
+##' @note Since version 2, a serious bug in the data was corrected for TMT 
+##' channels 12 to 16. Many more cells are therefore contained in the data.
+##' Version 2 is maintained for backward compatibility.
+##'  
+##' @source 
+##' The data were downloaded from the 
+##' [Slavov Lab](https://scope2.slavovlab.net/docs/data) website via a
+##' shared Google Drive 
+##' [folder](https://drive.google.com/drive/folders/1VzBfmNxziRYqayx3SP-cOe2gu129Obgx). 
+##' The raw data and the quantification data can also be found in the massIVE 
+##' repository 
+##' [MSV000083945](ftp://massive.ucsd.edu/MSV000083945).
+##' 
+##' @references Specht, Harrison, Edward Emmott, Aleksandra A. Petelski, R. Gray 
+##' Huffman, David H. Perlman, Marco Serra, Peter Kharchenko, Antonius Koller, 
+##' and Nikolai Slavov. 2019. “Single-Cell Mass-Spectrometry Quantifies the 
+##' Emergence of Macrophage Heterogeneity.” bioRxiv. 
+##' ([link to article](https://doi.org/10.1101/665307)).
+##' 
+##' @docType data
+##'
+##' @keywords datasets
+##' 
+"specht2019v3"
 
 
 ####---- DOU ET AL. 2019 ----####
 
 
-#' FACS + nanoPOTS + TMT: HeLa digests (Dou et al. 2019)
-#'  
-#' @description 
-#' Single-cell proteomics using nanoPOTS combined with TMT isobaric labeling. 
-#' The samples are not truly single cells but are commercial Hela digest diluted 
-#' to single cell amounts (0.2ng). The boosting wells contain the same digest 
-#' but at higher dose (10 ng).
-#' 
-#' @usage 
-#' data("dou2019_hela_protein")
-#' data("dou2019_hela_peptide")
-#' 
-#' @format 
-#' \itemize{
-#'   \item \code{dou2019_hela_protein}: a \code{\link{SingleCellExperiment}}
-#'   object with protein expression levels for 24,797 peptides x 20 "cells".
-#'   \item \code{dou2019_hela_protein}: a \code{\link{SingleCellExperiment}}
-#'   object with protein expression levels for 1,641 proteins x 20 "cells".
-#'   
-#' }
-#' See Details for information about data collection.
-#' 
-#' @details 
-#' 
-#' \strong{Peptide expression data: \code{dou2019_hela_peptide}}
-#' 
-#' The peptide data was constructed as follows. For every MS run:
-#' \itemize{
-#'   \item Load the MSGF+ identification files 
-#'   (\code{"Hela_run_*_msgfplus.mzid"}) and remove decoy and contaminant PSMs
-#'   \item Load the MASIC quantification files 
-#'   (\code{"Hela_run_*_ReporterIons.txt"})
-#'   \item Combine the identification and the quantification data by matching 
-#'   the \code{"scan.number.s"} and \code{"scanNumber"} fields, respectively
-#'   \item Format the data as an \code{\link{MSnSet}} object keeping 
-#'   \item Perform TMT-10 istope correction 
-#'   \item Sum-roll the PSM intensities to peptide intensities
-#'   \item Keep only useful feature data (peptide and protein sequence, start 
-#'   and end position of peptide location, protein length, protein description)
-#'   \item Extract the sample information (TMT ion, run number and experiment 
-#'   label) from the files names. Furthermore, sample type (lysate, carrier or
-#'   blank) and sample amount (in ng) were added from the article (see 
-#'   Reference).
-#' }
-#' Next, combine all runs in a single MSnSet (matching on peptide name), replace
-#' NA's by 0's and convert to an \code{\link{SingleCellExperiment}} object.
-#' 
-#' \strong{Protein expression data: \code{dou2019_hela_protein}}
-#'
-#' The data set is published as the supplementary data set 1 by Dou et al. in 
-#' 2019 (see references). The expression matrix contains 1641 proteins x 20 
-#' HeLa digests. The spreadsheet is called \code{ac9b03349_si_003.xlsx} and 
-#' contains 7 sheets from which we only took the sheet 6 (named \code{"5 - Run 
-#' 1 and 2 raw data"}) containing the combined data of two MS runs. It 
-#' corresponds to the assembly of MSGF+ identifications and MASIC reporter 
-#' assemblies. The data is then isotope corrected and sum rolled-up to the 
-#' protein level. Contaminant and reverse hit are removed from this table. This 
-#' is all performed by the authors. We converted the data to a 
-#' \code{\link{SingleCellExperiment}} object.
-#' 
-#' @source 
-#' The peptide and raw data can be downloaded from the massIVE repository 
-#' \href{ftp://massive.ucsd.edu/MSV000084110/}{MSV000084110}.
-#' 
-#' The protein data can be downloaded from the 
-#' \href{https://pubs.acs.org/doi/10.1021/acs.analchem.9b03349}{ACS Publications}
-#' website (Supplementary information section).
-#' 
-#' @references 
-#' Dou, Maowei, Geremy Clair, Chia-Feng Tsai, Kerui Xu, William B. 
-#' Chrisler, Ryan L. Sontag, Rui Zhao, et al. 2019. “High-Throughput Single Cell 
-#' Proteomics Enabled by Multiplex Isobaric Labeling in a Nanodroplet Sample 
-#' Preparation Platform.” Analytical Chemistry, September 
-#' (\href{https://doi.org/10.1021/acs.analchem.9b03349}{DOI}).
-#' 
-#' @seealso 
-#' \code{\link{dou2019_mouse_protein}}, \code{\link{dou2019_boosting_protein}}
-#' 
-#' @docType data
-#' 
-#' @keywords datasets
-#' 
-#' @aliases dou2019_hela_peptide dou2019_hela_protein
-#' 
-"dou2019_hela_protein"
+##' Dou et al. 2019: HeLa lysates 
+##'  
+##' Single-cell proteomics using nanoPOTS combined with TMT isobaric labeling.
+##' It contains quantitative information at PSM and protein level.
+##' The samples are commercial Hela lysates diluted to single cell amounts 
+##' (0.2ng). The boosting wells contain the same digest but at higher dose (10 
+##' ng).
+##' 
+##' @format A `Features` object with 3 assays, each assay being a 
+##' `SingleCellExperiment` object: 
+##' 
+##' - `Hela_run_1`: PSM data with 10 columns corresponding to the TMT 10plex 
+##'   channels. Columns hold quantitative information for HeLa lysate samples
+##'   (either 0, 0.2 or 10ng). This is the data for run 1. 
+##' - `Hela_run_1`: PSM data with 10 columns corresponding to the TMT 10plex 
+##'   channels. Columns hold quantitative information for HeLa lysate samples
+##'   (either 0, 0.2 or 10ng). This is the data for run 2.
+##' - `proteins`: protein data containing quantitative data for 1641 proteins 
+##'   and 20 samples (run 1 and run 2 combined). 
+##' 
+##' 
+##' Sample annotation is stored in `colData(dou2019_lysates)`. The description of the `rowData`
+##' fields for the PSM data can be found in the 
+##' [`MaxQuant` documentation](http://www.coxdocs.org/doku.php?id=maxquant:table:evidencetable).
+##' 
+##' See `Details` for information about data collection.
+##' 
+##' @details 
+##' 
+##' **Acquisition protocole**
+##' 
+##' The data was acquired using the following setup. More information can be 
+##' found in the source article (see `References`).
+##' 
+##' - **Cell isolation**: commercially available HeLa protein digest (Thermo 
+##'   Scientific).
+##' - **Sample preparation** performed using the nanoPOTs device. Protein 
+##'   extraction (DMM + TCEAP) + alkylation (IAA) + Lys-C digestion + trypsin
+##'   digestion + TMT 10plex labeling and pooling.
+##' - **Separation**: nanoLC (Dionex UltiMate with an in-house packed 50cm x 
+##'   30μm LC columns; 50nL/min)
+##' - **Ionization**: ESI (2,000V)
+##' - **Mass spectrometry**: Thermo Fisher Orbitrap Fusion Lumos Tribrid (MS1
+##'   accumulation time = 50ms; MS1 resolution = 120,000; MS1 AGC = 1E6; MS2 
+##'   accumulation time = 246ms; MS2 resolution = 60,000; MS2 AGC = 1E5)
+##' - **Data analysis**: MS-GF+ + MASIC (v3.0.7111) + RomicsProcessor (custom R
+##'   package)
+##' 
+##' **Data collection**
+##' 
+##' The PSM data were collected from the MassIVE repository MSV000084110 (see 
+##' `Source` section). The files downloaded files are:
+##' 
+##' - `Hela_run_*_msgfplus.mzid`: the MS-GF+ identification result files
+##' - `Hela_run_*_ReporterIons.txt`: the MASIC quantification result files
+##' 
+##' For each batch, the quantification and identification data were combined 
+##' based on the scan number (common to both data sets). The combined datasets 
+##' for the different runs were then concatenated feature-wise. The sample 
+##' annotation table was manually created based on the available information 
+##' provided in the article. The data were then converted to a `QFeatures` 
+##' object using the `scp::readSCP` function. 
+##' 
+##' The protein data was download from `Supporting information` section from the 
+##' publisher's website (see `Sources`). The data is supplied as an Excel file 
+##' `ac9b03349_si_003.xlsx`. The file contains 7 sheets from which we only took 
+##' the sheet 6 (named `5 - Run 1 and 2 raw data``) with the combined protein 
+##' data for the two runs. We converted the data to a `SingleCellExperiment` 
+##' object and added the object as a new assay in the `QFeatures` dataset 
+##' (containing the PSM data). Links between the proteins and the corresponding
+##' PSM were created. 
+##' 
+##' @source 
+##' The PSM data can be downloaded from the massIVE repository MSV000084110. FTP 
+##' link: ftp://massive.ucsd.edu/MSV000084110/
+##' 
+##' The protein data can be downloaded from the 
+##' [ACS Publications](https://pubs.acs.org/doi/10.1021/acs.analchem.9b03349)
+##' website (Supporting information section).
+##' 
+##' @references 
+##' Dou, Maowei, Geremy Clair, Chia-Feng Tsai, Kerui Xu, William B. 
+##' Chrisler, Ryan L. Sontag, Rui Zhao, et al. 2019. “High-Throughput Single Cell 
+##' Proteomics Enabled by Multiplex Isobaric Labeling in a Nanodroplet Sample 
+##' Preparation Platform.” Analytical Chemistry, September 
+##' ([link to article](https://doi.org/10.1021/acs.analchem.9b03349)).
+##' 
+##' @seealso 
+##' [dou2019_mouse], [dou2019_boosting]
+##' 
+##' @docType data
+##' 
+##' @keywords datasets
+##' 
+##' 
+"dou2019_lysates"
+
+
+##' Dou et al. 2019: single cells from cultured murine cell lines
+##'  
+##' Single-cell proteomics using nanoPOTS combined with TMT isobaric labeling. 
+##' It contains quantitative information at PSM and protein level.
+##' The cell types are either "Raw" (macrophage cells), "C10" (epihelial cells), 
+##' or "SVEC" (endothelial cells). Out of the 132 wells, 72 contain single cells, 
+##' corresponding to 24 C10 cells, 24 RAW cells, and 24 SVEC. The other wells are 
+##' either boosting channels (12), empty channels (36) or reference channels 
+##' (12). Boosting and reference channels are balanced (1:1:1) mixes of C10, 
+##' SVEC, and RAW samples at 5 ng and 0.2 ng, respectively. The different cell 
+##' types where evenly distributed across 4 nanoPOTS chips. Samples were 
+##' 11-plexed with TMT labeling.
+##' 
+##' @format A `QFeatures` object with 13 assays, each assay being a 
+##' `SingleCellExperiment` object: 
+##' 
+##' - `Single_Cell_Chip_X_Y`: PSM data with 11 columns corresponding to the TMT 
+##'   channels (see `Notes`). The `X` indicates the chip number (from 1 to 4) 
+##'   and `Y` indicates the row name on the chip (from A to C). 
+##' - `proteins`: protein data containing quantitative data for 2331 proteins 
+##'   and 132 samples (all runs combined). 
+##' 
+##' Sample annotation is stored in `colData(dou2019_mouse)`.
+##' 
+##' See `Details` for information about data collection.
+##' 
+##' @details 
+##' 
+##' **Acquisition protocole**
+##' 
+##' The data was acquired using the following setup. More information can be 
+##' found in the source article (see `References`).
+##' 
+##' - **Cell isolation**: single-cells from the three murine cell lines were
+##'   isolated using FACS (BD Influx II cell sorter ). 
+##' - **Sample preparation** performed using the nanoPOTs device. Protein 
+##'   extraction (DMM + TCEAP) + alkylation (IAA) + Lys-C digestion + trypsin
+##'   digestion + TMT 10plex labeling and pooling.
+##' - **Separation**: nanoLC (Dionex UltiMate with an in-house packed 50cm x 
+##'   30μm LC columns; 50nL/min)
+##' - **Ionization**: ESI (2,000V)
+##' - **Mass spectrometry**: Thermo Fisher Orbitrap Fusion Lumos Tribrid (MS1
+##'   accumulation time = 50ms; MS1 resolution = 120,000; MS1 AGC = 1E6; MS2 
+##'   accumulation time = 246ms; MS2 resolution = 60,000; MS2 AGC = 1E5)
+##' - **Data analysis**: MS-GF+ + MASIC (v3.0.7111) + RomicsProcessor (custom R
+##'   package)
+##' 
+##' **Data collection**
+##' 
+##' The PSM data were collected from the MassIVE repository MSV000084110 (see 
+##' `Source` section). The files downloaded files are:
+##' 
+##' 
+##' - `Single_Cell_Chip_*_*_msgfplus.mzid`: the MS-GF+ identification result 
+##'   files.
+##' - `Single_Cell_Chip_*_*_ReporterIons.txt`: the MASIC quantification result 
+##'   files.
+##' 
+##' For each batch, the quantification and identification data were combined 
+##' based on the scan number (common to both data sets). The combined datasets 
+##' for the different runs were then concatenated feature-wise. The sample 
+##' annotation table was manually created based on the available information 
+##' provided in the article. The data were then converted to a `QFeatures` 
+##' object using the `scp::readSCP` function. 
+##' 
+##' The protein data was download from `Supporting information` section from the 
+##' publisher's website (see `Sources`). The data is supplied as an Excel file 
+##' `ac9b03349_si_005.xlsx`. The file contains 7 sheets from which we only took 
+##' the 2nd (named `01 - Raw sc protein data`) with the combined protein data 
+##' for the 12 runs. We converted the data to a `SingleCellExperiment` object 
+##' and added the object as a new assay in the `QFeatures` dataset (containing 
+##' the PSM data). Links between the proteins and the corresponding PSM were 
+##' created. 
+##' 
+##' @note Although a TMT 10plex labeling is reported in the article, the PSM 
+##' data contained 11 channels for each run. Those 11th channel contain mostly 
+##' missing data and are hence assumed to be empty channels. 
+##' 
+##' @source 
+##' The PSM data can be downloaded from the massIVE repository MSV000084110. FTP 
+##' link: ftp://massive.ucsd.edu/MSV000084110/
+##' 
+##' The protein data can be downloaded from the 
+##' [ACS Publications](https://pubs.acs.org/doi/10.1021/acs.analchem.9b03349)
+##' website (Supporting information section).
+##' 
+##' @references 
+##' Dou, Maowei, Geremy Clair, Chia-Feng Tsai, Kerui Xu, William B. 
+##' Chrisler, Ryan L. Sontag, Rui Zhao, et al. 2019. “High-Throughput Single Cell 
+##' Proteomics Enabled by Multiplex Isobaric Labeling in a Nanodroplet Sample 
+##' Preparation Platform.” Analytical Chemistry, September 
+##' ([link to article](https://doi.org/10.1021/acs.analchem.9b03349)).
+##' 
+##' @seealso 
+##' [dou2019_lysates], [dou2019_boosting]
+##' 
+##' @docType data
+##' 
+##' @keywords datasets
+##' 
+##' 
+"dou2019_mouse"
+
+
+##' Dou et al. 2019: testing boosting ratios
+##'
+##' Single-cell proteomics using nanoPOTS combined with TMT isobaric labeling. 
+##' It contains quantitative information at PSM and protein level.
+##' The cell types are either "Raw" (macrophage cells), "C10" 
+##' (epihelial cells), or "SVEC" (endothelial cells). Each cell is replicated 2 
+##' or 3x. Each cell type was run using 3 levels of boosting: 0 ng (no boosting), 
+##' 5 ng or 50 ng. When boosting was applied, 1 reference well and 1 boosting 
+##' well were added, otherwise 1 empty well was added. Each boosting setting 
+##' (0ng, 5ng, 50ng) was run in duplicate.
+##' 
+##' @format A `QFeatures` object with 7 assays, each assay being a 
+##' `SingleCellExperiment` object: 
+##' 
+##' - `Boosting_X_run_Y`: PSM data with 10 columns corresponding to the TMT 
+##'   10plex channels. The `X` indicates the boosting amount (0ng, 5ng or 50ng) 
+##'   and `Y` indicates the run number (1 or 2). 
+##' - `proteins`: protein data containing quantitative data for 1436 proteins 
+##'   and 60 samples (all runs combined). 
+##' }
+##' 
+##' Sample annotation is stored in `colData(dou2019_boosting)`.
+##' 
+##' See `Details` for information about data collection.
+##' 
+##' @details 
+##' 
+##' **Acquisition protocole**
+##' 
+##' The data was acquired using the following setup. More information can be 
+##' found in the source article (see `References`).
+##' 
+##' - **Cell isolation**: single-cells from the three murine cell lines were
+##'   isolated using FACS (BD Influx II cell sorter ). Boosting sample were 
+##'   prepared (presumably in bulk) from 1:1:1 mix of the three cell lines.
+##' - **Sample preparation** performed using the nanoPOTs device. Protein 
+##'   extraction (DMM + TCEAP) + alkylation (IAA) + Lys-C digestion + trypsin
+##'   digestion + TMT 10plex labeling and pooling.
+##' - **Separation**: nanoLC (Dionex UltiMate with an in-house packed 50cm x 
+##'   30μm LC columns; 50nL/min)
+##' - **Ionization**: ESI (2,000V)
+##' - **Mass spectrometry**: Thermo Fisher Orbitrap Fusion Lumos Tribrid (MS1
+##'   accumulation time = 50ms; MS1 resolution = 120,000; MS1 AGC = 1E6; MS2 
+##'   accumulation time = 246ms; MS2 resolution = 60,000; MS2 AGC = 1E5)
+##' - **Data analysis**: MS-GF+ + MASIC (v3.0.7111) + RomicsProcessor (custom R
+##'   package)
+##' 
+##' **Data collection**
+##' 
+##' The PSM data were collected from the MassIVE repository MSV000084110 (see 
+##' `Source` section). The files downloaded files are:
+##' 
+##' - `Boosting_*ng_run_*_msgfplus.mzid`: the MS-GF+ identification result 
+##'   files.
+##' - `Boosting_*ng_run_*_ReporterIons.txt`: the MASIC quantification result 
+##'   files.
+##' 
+##' For each batch, the quantification and identification data were combined 
+##' based on the scan number (common to both data sets). The combined datasets 
+##' for the different runs were then concatenated feature-wise. The sample 
+##' annotation table was manually created based on the available information 
+##' provided in the article. The data were then converted to a `QFeatures` 
+##' object using the `scp::readSCP` function. 
+##' 
+##' The protein data was download from `Supporting information` section from the 
+##' publisher's website (see `Sources`). The data is supplied as an Excel file 
+##' `ac9b03349_si_004.xlsx`. The file contains 7 sheets from which we took the 
+##' 2nd, 4th and 6th sheets (named `01 - No Boost raw data`, 
+##' `03 - 5ng boost raw data`, `05 - 50ng boost raw data`, respectively). The 
+##' sheets contain the combined protein data for the duplicate runs given the 
+##' boosting amount. We joined the data for all boosting ration based on the 
+##' protein name and converted the data to a `SingleCellExperiment` object. We
+##' then added the object as a new assay in the `QFeatures` dataset (containing 
+##' the PSM data). Links between the proteins and the corresponding PSM were 
+##' created. 
+##' 
+##' @source 
+##' The PSM data can be downloaded from the massIVE repository MSV000084110. FTP 
+##' link: ftp://massive.ucsd.edu/MSV000084110/
+##' 
+##' The protein data can be downloaded from the 
+##' [ACS Publications](https://pubs.acs.org/doi/10.1021/acs.analchem.9b03349)
+##' website (Supporting information section).
+##' 
+##' @references 
+##' Dou, Maowei, Geremy Clair, Chia-Feng Tsai, Kerui Xu, William B. 
+##' Chrisler, Ryan L. Sontag, Rui Zhao, et al. 2019. “High-Throughput Single Cell 
+##' Proteomics Enabled by Multiplex Isobaric Labeling in a Nanodroplet Sample 
+##' Preparation Platform.” Analytical Chemistry, September 
+##' ([link to article](https://doi.org/10.1021/acs.analchem.9b03349)).
+##' 
+##' @seealso 
+##' [dou2019_lysates], [dou2019_mouse]
+##' 
+##' @docType data
+##' 
+##' @keywords datasets
+##' 
+##' 
+"dou2019_boosting"
+
+
+####---- ZHU ET AL. 2018 (MCP) ----####
+
+
+##' Zhu et al. 2018 (Mol. Cel. Prot.): rat brain laser dissections
+##'
+##' Near single-cell proteomics data of laser cuptured micro-dissection samples.
+##' The samples are 24 brain section from rat pups (day 17). The slices are 12
+##' µm thick squares of either 50, 100, or 200 µm width. 5 samples were dissected 
+##' from the corpus callum (`CC`), 4 samples were dissected from the 
+##' corpus collosum (`CP`), 13 samples were extracted from the cerebral 
+##' cortex (`CTX`), and 2 samples are labeled as (`Mix``).
+##' 
+##' @format A `QFeatures` object with 1 assay, `peptides`. It is a 
+##' `SingleCellExperiment` object containing the quantitative data for 13055 
+##' peptides in 24 samples.
+##' 
+##' Sample annotation is stored in `colData(zhu2018MCP)`.
+##' 
+##' See `Details` for information about data collection.
+##' 
+##' @details 
+##' 
+##' **Acquisition protocole**
+##' 
+##' The data was acquired using the following setup. More information can be 
+##' found in the source article (see `References`).
+##' 
+##' - **Cell isolation**: brain patches were collected using laser-captuer 
+##'   microdissection (PALM MicroBeam) on flash frozen rat (*Rattus norvergicus*)
+##'   brain tissues. Note that the samples were stained with H&E before 
+##'   dissection for histological analysiis. DMSO is used as sample collection 
+##'   solution
+##' - **Sample preparation** performed using the nanoPOTs device. DMSO 
+##'   evaporation + protein extraction (DMM + DTT) + alkylation (IAA) + Lys-C 
+##'   digestion + trypsin digestion.
+##' - **Separation**: nanoLC (Dionex UltiMate with an in-house packed 60cm x 
+##'   30μm LC columns; 50nL/min)
+##' - **Ionization**: ESI (2,000V)
+##' - **Mass spectrometry**: Thermo Fisher Orbitrap Fusion Lumos Tribrid (MS1
+##'   accumulation time = 246ms; MS1 resolution = 120,000; MS1 AGC = 3E6). The 
+##'   MS/MS settings  depend on the sample size, excepted for the AGC = 1E5. 
+##'   50µm (time = 502ms; resolution = 240,000), 100µm (time = 246ms; resolution 
+##'   = 120,000), 200µm (time = 118ms; resolution = 60,000). 
+##' - **Data analysis**: MaxQuant (v1.5.3.30) + Perseus (v1.5.6.0) + Origin Pro
+##'   2017
+##' 
+##' **Data collection**
+##' 
+##' The PSM data were collected from the PRIDE repository (accession ID: 
+##' PXD008844).  We downloaded the `MaxQuant_Peptides.txt` file containing the 
+##' combined identification and quantification results. The sample annotation 
+##' was infered from the names of columns holding the quantification data. The 
+##' data were then converted to a `QFeatures` object using the `scp::readSCP` 
+##' function. 
+##' 
+##' @source 
+##' The PSM data can be downloaded from the PRIDE repository PXD008844. FTP link
+##' ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2018/07/PXD008844
+##' 
+##' @references 
+##' Zhu, Ying, Maowei Dou, Paul D. Piehowski, Yiran Liang, Fangjun Wang, Rosalie 
+##' K. Chu, William B. Chrisler, et al. 2018. “Spatially Resolved Proteome 
+##' Mapping of Laser Capture Microdissected Tissue with Automated Sample 
+##' Transfer to Nanodroplets.” Molecular & Cellular Proteomics: MCP 17 (9): 
+##' 1864–74 ([link to article](http://dx.doi.org/10.1074/mcp.TIR118.000686)).
+##' 
+##' @docType data
+##' 
+##' @keywords datasets
+##' 
+##' 
+"zhu2018MCP"
+
+####---- ZHU ET AL. 2018 (NC) ----####
+
+
+##' Zhu et al. 2018 (Nat. Comm.): HeLa titration
+##'
+##' Near single-cell proteomics data of HeLa samples containing different number
+##' of cells. There are three groups of cell concentrations: low (10-14 cells), 
+##' medium (35-45 cells) and high (137-141 cells). The data also contains 
+##' measures for blanks, HeLa lysates (50 cell equivalent) and 2 cancer cell 
+##' line lysates (MCF7 and THP1, 50 cell equivalent).
+##' 
+##' @format A `QFeatures` object with 1 assay, `peptides`. It is a 
+##' `SingleCellExperiment` object containing the quantitative data for 37795 
+##' peptides in 21 samples.
+##' 
+##' Sample annotation is stored in `colData(zhu2018NC_hela)`.
+##' 
+##' See `Details` for information about data collection.
+##' 
+##' @details 
+##' 
+##' **Acquisition protocole**
+##' 
+##' The data was acquired using the following setup. More information can be 
+##' found in the source article (see `References`).
+##' 
+##' - **Cell isolation**: HeLa cell concentration was adjusted by serial 
+##'   dilution and cell counting was performed manually using an inverted 
+##'   microscope. 
+##' - **Sample preparation** performed using the nanoPOTs device. Protein 
+##'   extraction using RapiGest (+ DTT) + alkylation (IAA) + Lys-C digestion + 
+##'   cleave RapiGest (formic acid)
+##' - **Separation**: nanoACQUITY UPLC pump with an Self-Pack PicoFrit 70cm x 
+##'   30μm LC columns; 60nL/min)
+##' - **Ionization**: ESI (1,900V)
+##' - **Mass spectrometry**: Thermo Fisher Orbitrap Fusion Lumos Tribrid. MS1
+##'   settings: accumulation time = 246ms; resolution = 120,000; AGC = 1E6. 
+##'   MS/MS settings, depend on the sample size, excepted for the AGC = 1E5. 
+##'   Blank and ~10 cells (time = 502ms; resolution = 240,000), ~ 40 cells 
+##'   (time = 246ms; resolution = 120,000), ~140 cells (time = 118ms; 
+##'   resolution = 60,000). 
+##' - **Data analysis**: MaxQuant (v1.5.3.30) + Perseus + OriginLab 2017
+##' 
+##' **Data collection**
+##' 
+##' The PSM data were collected from the PRIDE repository (accession ID: 
+##' PXD006847).  We downloaded the `CulturedCells_peptides.txt` file containing 
+##' the combined identification and quantification results. The sample annotation 
+##' was infered from the names of columns holding the quantification data and 
+##' the informaion in the articel. The data were then converted to a `QFeatures` 
+##' object using the `scp::readSCP` function. 
+##' 
+##' @source 
+##' The PSM data can be downloaded from the PRIDE repository PXD006847. FTP
+##' link: ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2018/01/PXD00684
+##' 
+##' @references 
+##' 
+##' Zhu, Ying, Paul D. Piehowski, Rui Zhao, Jing Chen, Yufeng Shen, Ronald J. 
+##' Moore, Anil K. Shukla, et al. 2018. “Nanodroplet Processing Platform for 
+##' Deep and Quantitative Proteome Profiling of 10-100 Mammalian Cells.” Nature 
+##' Communications 9 (1): 882 
+##' ([link to article](http://dx.doi.org/10.1038/s41467-018-03367-w)).
+##' 
+##' @seealso The same experiment was conducted on HeLa lysates and the data is 
+##'     available in [zhu2018NC_lysates].
+##' 
+##' @docType data
+##' 
+##' @keywords datasets
+##' 
+##' 
+"zhu2018NC_hela"
+
+
+##' Zhu et al. 2018 (Nat. Comm.): HeLa lysates
+##'
+##' Near single-cell proteomics data of HeLa lysates at different 
+##' concentrations (10, 40 and 140 cell equivalent). Each concentration is 
+##' acquired in triplicate. 
+##' 
+##' @format A `QFeatures` object with 1 assay, `peptides`. It is a 
+##' `SingleCellExperiment` object containing the quantitative data for 14921 
+##' peptides in 9 samples.
+##' 
+##' Sample annotation is stored in `colData(zhu2018NC_lysates)`.
+##' 
+##' See `Details` for information about data collection.
+##' 
+##' @details 
+##' 
+##' **Acquisition protocole**
+##' 
+##' The data was acquired using the following setup. More information can be 
+##' found in the source article (see `References`).
+##' 
+##' - **Cell isolation**: HeLas were collected from cell cultures.
+##' - **Sample preparation** performed in bulk (5E5 cells/mL). Protein 
+##'   extraction using RapiGest (+ DTT) + dilution to target concentration +
+##'   alkylation (IAA) + Lys-C digestion + trypsin digestion + cleave RapiGest
+##'   (formic acid)
+##' - **Separation**: nanoACQUITY UPLC pump with an Self-Pack PicoFrit 70cm x 
+##'   30μm LC columns; 60nL/min)
+##' - **Ionization**: ESI (1,900V)
+##' - **Mass spectrometry**: Thermo Fisher Orbitrap Fusion Lumos Tribrid. MS1
+##'   settings: accumulation time = 246ms; resolution = 120,000; AGC = 1E6. 
+##'   MS/MS settings, depend on the sample size, excepted for the AGC = 1E5. 
+##'   Blank and ~10 cells (time = 502ms; resolution = 240,000), ~ 40 cells 
+##'   (time = 246ms; resolution = 120,000), ~140 cells (time = 118ms; 
+##'   resolution = 60,000). 
+##' - **Data analysis**: MaxQuant (v1.5.3.30) + Perseus + OriginLab 2017
+##' 
+##' **Data collection**
+##' 
+##' The PSM data were collected from the PRIDE repository (accession ID: 
+##' PXD006847).  We downloaded the `CulturedCells_peptides.txt` file containing 
+##' the combined identification and quantification results. The sample annotation 
+##' was infered from the names of columns holding the quantification data and 
+##' the informaion in the articel. The data were then converted to a `QFeatures` 
+##' object using the `scp::readSCP` function. 
+##' 
+##' @source 
+##' The PSM data can be downloaded from the PRIDE repository PXD006847. The 
+##' source link is:
+##' 
+##' ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2018/01/PXD00684
+##' 
+##' @references 
+##' 
+##' Zhu, Ying, Paul D. Piehowski, Rui Zhao, Jing Chen, Yufeng Shen, Ronald J. 
+##' Moore, Anil K. Shukla, et al. 2018. “Nanodroplet Processing Platform for 
+##' Deep and Quantitative Proteome Profiling of 10-100 Mammalian Cells.” Nature 
+##' Communications 9 (1): 882 
+##' ([link to article](http://dx.doi.org/10.1038/s41467-018-03367-w)).
+##' 
+##' @seealso The same experiment was conducted directly on HeLa cells samples 
+##'     rather than lysates. The data is available in [zhu2018NC_hela].
+##'     
+##' @docType data
+##' 
+##' @keywords datasets
+##' 
+##' 
+"zhu2018NC_lysates"
+
+
+##' Zhu et al. 2018 (Nat. Comm.): human pancreatic islets
+##'
+##'
+##' Near single-cell proteomics data human pancreas samples. The samples are 
+##' were laser dissected from pancreatic tissue slices from pancreata obtained 
+##' from organ donors through the JDRFNetwork for Pancreatic Organ Donors with 
+##' Diabetes (nPOD) program. The sample come either from control patients (n=9)
+##' or from type 1 diabetes (T1D) patients (n=9). 
+##' 
+##' @format A `QFeatures` object with 1 assay, `peptides`. It is a 
+##' `SingleCellExperiment` object containing the quantitative data for 24321 
+##' peptides in 18 samples.
+##' 
+##' Sample annotation is stored in `colData(zhu2018NC_islets)`.
+##' 
+##' See `Details` for information about data collection.
+##' 
+##' @details 
+##' 
+##' **Acquisition protocole**
+##' 
+##' The data was acquired using the following setup. More information can be 
+##' found in the source article (see `References`).
+##' 
+##' - **Cell isolation**: The islets were extracted from the pacreatic tissues 
+##'   using laser-capture microdissection.
+##' - **Sample preparation** performed using the nanoPOTs device. Protein 
+##'   extraction using RapiGest (+ DTT) + alkylation (IAA) + Lys-C digestion + 
+##'   cleave RapiGest (formic acid)
+##' - **Separation**: nanoACQUITY UPLC pump with an Self-Pack PicoFrit 70cm x 
+##'   30μm LC columns; 60nL/min)
+##' - **Ionization**: ESI (1,900V)
+##' - **Mass spectrometry**: Thermo Fisher Orbitrap Fusion Lumos Tribrid. MS1
+##'   settings: accumulation time = 246ms; resolution = 120,000; AGC = 1E6. 
+##'   MS/MS settings: accumulation time = 118ms; resolution = 60,000; AGC = 1E5.
+##' - **Data analysis**: MaxQuant (v1.5.3.30) + Perseus + OriginLab 2017
+##' 
+##' **Data collection**
+##' 
+##' The PSM data were collected from the PRIDE repository (accession ID: 
+##' PXD006847).  We downloaded the `Islet_t1d_ct_peptides.txt` file containing 
+##' the combined identification and quantification results. The sample annotation 
+##' was infered from the names of columns holding the quantification data and 
+##' the informaion in the articel. The data were then converted to a `QFeatures` 
+##' object using the `scp::readSCP` function. 
+##' 
+##' @source 
+##' The PSM data can be downloaded from the PRIDE repository PXD006847. The 
+##' source link is:
+##' 
+##' ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2018/01/PXD00684
+##' 
+##' @references 
+##' 
+##' Zhu, Ying, Paul D. Piehowski, Rui Zhao, Jing Chen, Yufeng Shen, Ronald J. 
+##' Moore, Anil K. Shukla, et al. 2018. “Nanodroplet Processing Platform for 
+##' Deep and Quantitative Proteome Profiling of 10-100 Mammalian Cells.” Nature 
+##' Communications 9 (1): 882 
+##' ([link to article](http://dx.doi.org/10.1038/s41467-018-03367-w)).
+##' 
+##' @docType data
+##' 
+##' @keywords datasets
+##' 
+"zhu2018NC_islets"
+
+
+##' Cong et al. 2020 (Ana. Chem.): HeLa single cells
+##'
+##' Single-cell proteomics using the nanoPOTS sample processing device
+##' in combination with ultranarrow-bore (20μm i.d.) packed-column LC 
+##' separations and the Orbitrap Eclipse Tribrid MS. The dataset
+##' contains label-free quantitative information at PSM, peptide and 
+##' protein level. The samples are single Hela cells. Bulk samples 
+##' (100 and 20 cells) were also included in the experiment to 
+##' increase the idendtification rate thanks to between-run matching 
+##' (cf MaxQuant).
+##' 
+##' @format A `QFeatures` object with 9 assays, each assay being a 
+##' `SingleCellExperiment` object: 
+##' 
+##' - `100/20 HeLa cells`: 2 assays containing PSM data for a bulk 
+##'   of 100 or 20 HeLa cells, respectively. 
+##' - `Blank`: assay containing the PSM data for a blank sample
+##' - `Single cell X`: 4 assays containing PSM data for a single cell.
+##'   The `X` indicates the replicate number. 
+##' - `peptides`: quantitative data for 12590 peptides in 7 samples 
+##'   (all runs are combined). 
+##' - `proteins`: quantitative data for 1801 proteins in 7 samples 
+##'   (all runs combined). 
+##' 
+##' Sample annotation is stored in `colData(cong2020AC)`.
+##' 
+##' See `Details` for information about data collection.
+##' 
+##' @details 
+##' 
+##' **Acquisition protocole**
+##' 
+##' The data was acquired using the following setup. More information 
+##' can be found in the source article (see `References`).
+##' 
+##' - **Cell isolation**: The HeLa cells were diluted and aspired 
+##'   using a microcapillary with a pulled tip.
+##' - **Sample preparation** performed using the nanoPOTs device. Protein 
+##'   extraction using RapiGest (+ DTT) + alkylation (IAA) + Lys-C digestion + 
+##'   cleave RapiGest (formic acid)
+##' - **Separation**: UltiMate 3000 RSLCnano pump with a home-packed 
+##'   nanoLC column (60cm x 20μm i.d.; ∼20 nL/min)
+##' - **Ionization**: ESI (2,000V; Nanospray Flex)
+##' - **Mass spectrometry**: Thermo Fisher Orbitrap Fusion Eclipse. 
+##'   MS1 settings: accumulation time = 246ms; resolution = 120,000; 
+##'   AGC = 1E6. MS/MS settings depend on quantity. All: AGC = 1E5. 
+##'   20-100 cels: accumulation time = 246ms; resolution = 120,000. 
+##'   Single cells: accumulation time = 500ms; resolution = 240,000. 
+##' - **Data analysis**: MaxQuant (v1.6.3.3)
+##' 
+##' **Data collection**
+##' 
+##' The PSM, peptide and protein data were collected from the PRIDE 
+##' repository (accession ID: PXD016921).  We downloaded the 
+##' `evidence.txt` file containing the PSM identification and 
+##' quantification results. The sample annotation was infered from the 
+##' samples names. The data were then converted to a `QFeatures` 
+##' object using the `scp::readSCP` function. 
+##' 
+##' The peptide data was similarly processed from the `peptides.txt`
+##' file. The quantitative column names were adpated to match the PSM
+##' data. The peptide data was added to `QFeatures` object and link
+##' between the features were stored. 
+##' 
+##' The protien data was similarly processed from the `proteinGroups.txt`
+##' file. The quantitative column names were adpated to match the PSM
+##' data. The peptide data was added to `QFeatures` object and link
+##' between the features were stored. 
+##' 
+##' @source 
+##' All files can be downloaded from the PRIDE repository PXD006847. The 
+##' source link is:
+##' 
+##' ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/02/PXD016921
+##' 
+##' @references 
+##' 
+##' Cong, Yongzheng, Yiran Liang, Khatereh Motamedchaboki, Romain 
+##' Huguet, Thy Truong, Rui Zhao, Yufeng Shen, Daniel Lopez-Ferrer, 
+##' Ying Zhu, and Ryan T. Kelly. 2020. “Improved Single-Cell Proteome 
+##' Coverage Using Narrow-Bore Packed NanoLC Columns and Ultrasensitive 
+##' Mass Spectrometry.” Analytical Chemistry, January. 
+##' ([link to article](https://doi.org/10.1021/acs.analchem.9b04631)).
+##' 
+##' @docType data
+##' 
+##' @keywords datasets
+##' 
+"cong2020AC"
 
 
 
-#' FACS + nanoPOTS + TMT: testing boosting ratios (Dou et al. 2019)
-#'  
-#' @description 
-#' Single-cell proteomics using nanoPOTS combined with TMT isobaric labeling. 
-#' The cell types are either "Raw" (macrophage cells), "C10" 
-#' (epihelial cells), or "SVEC" (endothelial cells). Each cell is replicated 2 
-#' or 3x. Each cell type was run using 3 levels of boosting: 0 ng (no boosting), 
-#' 5 ng or 50 ng. When boosting was applied, 1 reference well and 1 boosting 
-#' well were added, otherwise 1 empty well was added. Each boosting setting 
-#' (no boosting, 5ng, 50ng) was run twice.
-#' 
-#' @usage
-#' data("dou2019_boosting_protein")
-#' data("dou2019_boosting_peptide")
-#' 
-#' @format 
-#' \itemize{
-#'   \item \code{dou2019_boosting_peptide}: a \code{\link{SingleCellExperiment}}
-#'    with protein expression levels for 51,567 peptides x 60 sample.
-#'   \item \code{dou2019_boosting_protein}: a \code{\link{SingleCellExperiment}}
-#'    with protein expression levels for 1,436 proteins x 60 samples.
-#' }
-#' See Details for information about data collection.
-#' 
-#' @details 
-#' 
-#' \strong{Peptide expression data: \code{dou2019_boosting_peptide}}
-#' 
-#' The peptide data was constructed as follows. For every MS run:
-#' \itemize{
-#'   \item Load the MSGF+ identification files 
-#'   (\code{"Boosting_*_msgfplus.mzid"}) and remove decoy and 
-#'   contaminant PSMs
-#'   \item Load the MASIC quantification files 
-#'   (\code{"Boosting_*_ReporterIons.txt"})
-#'   \item Combine the identification and the quantification data by matching 
-#'   the \code{"scan.number.s"} and \code{"scanNumber"} fields, respectively
-#'   \item Format the data as an \code{\link{MSnSet}} object keeping 
-#'   \item Perform TMT-10 istope correction 
-#'   \item Sum-roll the PSM intensities to peptide intensities
-#'   \item Keep only useful feature data (peptide and protein sequence, start 
-#'   and end position of peptide location, protein length, protein description)
-#'   \item Extract the sample information (TMT ion, run, boosting amount and 
-#'   experiment label) from the files names. Furthermore, sample type was 
-#'   obtained from Table S2 (see reference).
-#' }
-#' Next, combine all runs in a single MSnSet (matching on peptide name), replace
-#' NA's by 0's and convert to an \code{\link{SingleCellExperiment}} object.
-#' 
-#' 
-#' \strong{Protein expression data: \code{dou2019_boosting_protein}}
-#'
-#' The data set is published as the supplementary data set 2 by Dou et al. in 
-#' 2019 (see references). The expression matrix contains 1436 proteins x 60 
-#' single cells. The spreadsheet is called \code{ac9b03349_si_004.xlsx} and contains 7 sheets 
-#' from which we took the 2nd, 4th and 6th sheets (named \code{"01 - No Boost 
-#' raw data"}, \code{"03 - 5ng boost raw data"}, \code{"05 - 50ng boost raw 
-#' data"}, respectively). It corresponds to the assembly of MSGF+ 
-#' identifications and MASIC reporter assemblies. The data is then isotope 
-#' corrected and sum rolled-up to the protein level. Contaminant and reverse hit 
-#' are removed from this table. This is all performed by the authors. We matched 
-#' the proteins between the three boosting settings and combined all data in a 
-#' single table. The boosting quantities are kept as phenotype data. The data 
-#' set is formated to an \code{\link{SingleCellExperiment}} object.
-#' 
-#' @source 
-#' The peptide and raw data can be downloaded from the massIVE repository 
-#' \href{ftp://massive.ucsd.edu/MSV000084110/}{MSV000084110}.
-#' 
-#' The protein data can be downloaded from the 
-#' \href{https://pubs.acs.org/doi/10.1021/acs.analchem.9b03349}{ACS Publications}
-#' website (Supplementary information section).
-#' 
-#' @references 
-#' Dou, Maowei, Geremy Clair, Chia-Feng Tsai, Kerui Xu, William B. 
-#' Chrisler, Ryan L. Sontag, Rui Zhao, et al. 2019. “High-Throughput Single Cell 
-#' Proteomics Enabled by Multiplex Isobaric Labeling in a Nanodroplet Sample 
-#' Preparation Platform.” Analytical Chemistry, September 
-#' (\href{https://doi.org/10.1021/acs.analchem.9b03349}{DOI}).
-#' 
-#' @seealso 
-#' \code{\link{dou2019_hela_protein}}, \code{\link{dou2019_mouse_protein}}
-#' 
-#' @docType data
-#' 
-#' @keywords datasets
-#' 
-#' @aliases dou2019_boosting_protein dou2019_boosting_peptide
-#' 
-"dou2019_boosting_protein"
-
-
-#' FACS + nanoPOTS + TMT: profiling of murine cell populations (Dou et al. 2019)
-#'  
-#' @description 
-#' Single-cell proteomics using nanoPOTS combined with TMT isobaric labeling. 
-#' The cell types are either "Raw" (macrophage cells), "C10" (epihelial cells), 
-#' or "SVEC" (endothelial cells). Out of the 132 wells, 72 contain single cells, 
-#' corresponding to 24 C10 cells, 24 RAW cells, and 24 SVEC. The other wells are 
-#' either boosting channels (12), empty channels (36) or reference channels 
-#' (12). Boosting and reference channels are balanced (1:1:1) mixes of C10, 
-#' SVEC, and RAW samples at 5 ng and 0.2 ng, respectively. The different cell 
-#' types where evenly distributed across 4 nanoPOTS chips. Samples were 
-#' 11-plexed with TMT labeling.
-#' 
-#' @usage 
-#' data("dou2019_mouse_peptide")
-#' data("dou2019_mouse_protein")
-#'  
-#' @format 
-#' \itemize{
-#'   \item \code{dou2019_mouse_peptide}: a \code{\link{SingleCellExperiment}}
-#'   with protein expression levels for 74,374 proteins x 132 samples.
-#'   \item \code{dou2019_mouse_protein}: a \code{\link{SingleCellExperiment}}
-#'   with protein expression levels for 2331 proteins x 132 samples.
-#' }
-#' See Details for information about data collection.
-#' 
-#' @details 
-#' 
-#' \strong{Peptide expression data: \code{dou2019_mouse_peptide}}
-#' 
-#' The peptide data was constructed as follows. For every MS run:
-#' \itemize{
-#'   \item Load the MSGF+ identification files 
-#'   (\code{"Single_Cell_Chip_*_msgfplus.mzid"}) and remove decoy and 
-#'   contaminant PSMs
-#'   \item Load the MASIC quantification files 
-#'   (\code{"Single_Cell_Chip_*_ReporterIons.txt"})
-#'   \item Combine the identification and the quantification data by matching 
-#'   the \code{"scan.number.s"} and \code{"scanNumber"} fields, respectively
-#'   \item Format the data as an \code{\link{MSnSet}} object keeping 
-#'   \item Perform TMT-11 istope correction 
-#'   \item Sum-roll the PSM intensities to peptide intensities
-#'   \item Keep only useful feature data (peptide and protein sequence, start 
-#'   and end position of peptide location, protein length, protein description)
-#'   \item Extract the sample information (TMT ion, chip number and experiment 
-#'   label) from the files names. Furthermore, sample type was obtained from 
-#'   Table S1 (see reference).
-#' }
-#' Next, combine all runs in a single MSnSet (matching on peptide name), replace
-#' NA's by 0's and convert to an \code{\link{SingleCellExperiment}} object.
-#' 
-#' \strong{Protein expression data: \code{dou2019_mouse_protein}}
-#'
-#' The data set is published as the supplementary data set 3 by Dou et al. in 
-#' 2019 (see references). The expression matrix contains 2331 proteins x 132 
-#' wells. The spreadsheet is called \code{ac9b03349_si_005.xlsx} and contains 7 
-#' sheets from which we took only the 2nd (named \code{"01 - Raw sc protein 
-#' data"}). It corresponds to the assembly of MSGF+ identifications and MASIC 
-#' reporter assemblies. The data is then isotope corrected and sum rolled-up to 
-#' the protein level. Contaminant and reverse hit are removed from this table. 
-#' This is performed by the authors. We converted the data to a
-#' \code{\link{SingleCellExperiment}} object.
-#' 
-#' @source 
-#' The peptide and raw data can be downloaded from the massIVE repository 
-#' \href{ftp://massive.ucsd.edu/MSV000084110/}{MSV000084110}.
-#' 
-#' The protein data can be downloaded from the 
-#' \href{https://pubs.acs.org/doi/10.1021/acs.analchem.9b03349}{ACS Publications}
-#' website (Supplementary information section).
-#' 
-#' @references 
-#' Dou, Maowei, Geremy Clair, Chia-Feng Tsai, Kerui Xu, William B. 
-#' Chrisler, Ryan L. Sontag, Rui Zhao, et al. 2019. “High-Throughput Single Cell 
-#' Proteomics Enabled by Multiplex Isobaric Labeling in a Nanodroplet Sample 
-#' Preparation Platform.” Analytical Chemistry, September 
-#' (\href{https://doi.org/10.1021/acs.analchem.9b03349}{DOI}).
-#' 
-#' @seealso 
-#' \code{\link{dou2019_hela_protein}}, \code{\link{dou2019_boosting_protein}}
-#' 
-#' @docType data
-#' 
-#' @keywords datasets
-#' 
-#' @aliases dou2019_mouse_protein dou2019_mouse_peptide
-#' 
-"dou2019_mouse_protein"
-
-
-#' SCoPE-MS + mPOP lysis upgrade: Master Mix 20180824 (Specht et al. 2018)
-#'
-#' @description 
-#' Single cell proteomics data produced and published by Specht et al. from the 
-#' Slavov Lab (see references). Channels are either carrier (50 cell equivalent 
-#' of Jurkat or U-937 digestion product), empty, or single cell equivalent of 
-#' digestion product (Jurkat or U-937).
-#' 
-#' @usage 
-#' data("specht2018_peptide")
-#' 
-#' @format 
-#' \itemize{
-#'   \item \code{specht2018_peptide}: a \code{\link{SingleCellExperiment}} 
-#'   with peptide expression levels for 1838 peptides x 220 cells.
-#' }
-#' See Details for information about data collection.
-#' 
-#' @details
-#' 
-#' \strong{Peptide expression data: \code{specht2018_peptide}}
-#' 
-#' It contains quantitative information for 1824 peptides x 220 channels. The 
-#' peptide expression data was parsed from the \code{evidence.txt} file from
-#' the MaxQuant output. We processed the file as follows: 
-#' \itemize{
-#'   \item Contaminants and reverse hits are removed
-#'   \item Peptides with PIF (parent ion fraction) smaller than 0.8 and PEP 
-#'   (posterior error probability) greater then 0.02 are removed
-#'   \item Experiment sets with less than 300 identified peptides are discarded. 
-#'   Note that all experiment sets contained more than 300 identified peptides.
-#'   \item Some peptides were identified twice within the same experiment set 
-#'   because of different charge states. The peptide identification with lowest 
-#'   PEP is kept and the other(s) discarded. 
-#'   \item Intensity data is formated to a feature (peptide) x sample 
-#'   (combination of experiment run and TMT channel) matrix. 
-#'   \item Peptide information is gathered in a feature data frame. PEP, PIF, 
-#'   Score, and retention time are aggregated by taking the median. When the 
-#'   mass is differing among the same peptide sequence, only the mass for the 
-#'   unmodified peptide is kept.
-#'   \item Sample information is gathered in a phenotype data frame.
-#' }
-#'  We finally formated the data to a \code{\link{SingleCellExperiment}} object.
-#'
-#' \strong{Protein expression data: \code{specht2018_protein}}
-#' 
-#' TODO
-#' 
-#' @source 
-#' The peptide data can be downloaded from the 
-#' \href{http://slavovlab.net/mPOP/index.html}{Slavov Lab} website. The raw 
-#' data and quantification data can also be found in the massIVE repository 
-#' \href{ftp://massive.ucsd.edu/MSV000082841}{MSV000082841}
-#'
-#' @references 
-#' Specht, Harrison, Guillaume Harmange, David H. Perlman, Edward Emmott, 
-#' Zachary Niziolek, Bogdan Budnik, and Nikolai Slavov. 2018. “Automated Sample 
-#' Preparation for High-Throughput Single-Cell Proteomics.” bioRxiv 
-#' (\href{https://doi.org/10.1101/399774}{DOI}).
-#' 
-#' 
-#' @docType data
-#'
-#' @keywords datasets
-#' 
-#' @aliases specht2018_peptide
-#' 
-"specht2018_peptide"
+##' Zhu et al. 2019 (eLife): chicken utricle cells
+##'
+##'
+##' Near single-cell proteomics data from chicken utricle acquired to 
+##' study the hair-cell development. The cells are isolated from 
+##' peeled utrical epithelium and separated into hair cells (FM1-43 
+##' high) and supporting cells (FM1-43 low). The sample contain either 
+##' 1 cell (n = 28), 3 cells (n = 7), 5 cells (n = 8) or 20 cells (n =
+##' 14). 
+##' 
+##' ##' @format A `QFeatures` object with 62 assays, each assay being a 
+##' `SingleCellExperiment` object: 
+##' 
+##' - `XYZw`: 60 assays containing PSM data. The sample are annotated 
+##'   as follows. `X` indicates the experiment, either 1 or 2. `Y` 
+##'   indicated the FM1-43 signal, either high (H) or low (L). `Z` 
+##'   indicates the number of cells (0, 1, 3, 5 or 20). `w` indicates
+##'   the replicate, starting from `a`, it can go up to `j`.
+##' - `peptides`: quantitative data for 3444 peptides in 60 samples 
+##'   (all runs are combined). 
+##' - `proteins`: quantitative data for 840 proteins in 60 samples 
+##'   (all runs combined). 
+##' 
+##' Sample annotation is stored in `colData(zhu2019EL)`.
+##' 
+##' See `Details` for information about data collection.
+##' 
+##' @details 
+##' 
+##' **Acquisition protocole**
+##' 
+##' The data was acquired using the following setup. More information can be 
+##' found in the source article (see `References`).
+##' 
+##' - **Cell isolation**: The cells were taken from the utricles of 
+##'   E15 chick embryos. Samples were stained with FM1-43FX and the 
+##'   cells were dissociated using enzymatic digestion. Cells were 
+##'   FACS sorted (BD Influx) and split based on their FM1-43 signal,
+##'   while ensuring no debris, doublets or dead cells are retained. 
+##' - **Sample preparation** performed using the nanoPOTs device. Cell 
+##'   lysis and protein extraction and reduction are performed using 
+##'   dodecyl beta-D-maltoside + DTT + ammonium bicarbonate. Protein
+##'   were then alkylated using IAA. Protein digestion is performed
+##'   using Lys-C and trypsin. Finally samples acidification is 
+##'   performed using formic acid.
+##' - **Separation**: Dionex UltiMate pump with an C18-Packed column 
+##'   (50cm x 30μm; 60nL/min)
+##' - **Ionization**: ESI (2,000V)
+##' - **Mass spectrometry**: Orbitrap Fusion Lumos Tribrid. MS1
+##'   settings: accumulation time = 246ms; resolution = 120,000; AGC = 
+##'   3E6. MS/MS settings: accumulation time = 502ms; resolution = 120,000; AGC = 2E5.
+##' - **Data analysis**: Andromeda & MaxQuant (v1.5.3.30) and the 
+##'   search database is NCBI GRCg6a.
+##' 
+##' **Data collection**
+##' 
+##' All data was collected from the PRIDE repository (accession ID: 
+##' PXD014256). 
+##' 
+##' The sample annotation information is provided in the 
+##' `Zhu_2019_chick_single_cell_samples.xlsx` file. 
+##' 
+##' The PSM data were found in the `evidence.txt` (in the 
+##' `Experiment 1+ 2`) folder. The PSM data were filtered so that it 
+##' contains only samples that are annotated. The data were then 
+##' converted to a `QFeatures` object using the `scp::readSCP` 
+##' function. 
+##' 
+##' The peptide data were found in the `peptides.txt` file. The column
+##' names holding the quantitative data were adapted to match the 
+##' sample names in the `QFeatures` object. The data were then 
+##' converted to a `SingleCellExperiment` object and then inserted in
+##' the `QFeatures` object. Links between the PSMs and the peptides 
+##' were added
+##' 
+##' A similar procedure was applied to the protein data. The data were
+##' found in the `proteinGroups.txt` file. The column names were 
+##' adapted, the data were converted to a `SingleCellExperiment` 
+##' object and then inserted in the `QFeatures` object. Links between 
+##' the peptides and the proteins were added
+##' 
+##' @source 
+##' The PSM data can be downloaded from the PRIDE repository PXD014256. The 
+##' source link is:
+##' 
+##' ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2019/11/PXD014256
+##' 
+##' @references 
+##' 
+##' Zhu, Ying, Mirko Scheibinger, Daniel Christian Ellwanger, Jocelyn 
+##' F. Krey, Dongseok Choi, Ryan T. Kelly, Stefan Heller, and Peter G.
+##' Barr-Gillespie. 2019. “Single-Cell Proteomics Reveals Changes in 
+##' Expression during Hair-Cell Development.” eLife 8 (November). 
+##' ([link to article](https://doi.org/10.7554/eLife.50777.)).
+##' 
+##' @docType data
+##' 
+##' @keywords datasets
+##' 
+"zhu2019EL"
